@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Linux安装LAMP</title>
+      <link href="/2019/05/27/Linux%E5%AE%89%E8%A3%85LAMP/"/>
+      <url>/2019/05/27/Linux%E5%AE%89%E8%A3%85LAMP/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux安装LAMP"><a href="#Linux安装LAMP" class="headerlink" title="Linux安装LAMP"></a>Linux安装LAMP</h2><h4 id="0、使用以下命令安装Apache："><a href="#0、使用以下命令安装Apache：" class="headerlink" title="0、使用以下命令安装Apache："></a><strong>0、使用以下命令安装Apache：</strong></h4><p>yum install httpd</p><p>安装完之后，重新启动Apache：/etc/init.d/httpd restart<br>接着将Apache设置为开机启动：chkconfig httpd on.(这一步使得服务器不需要在每次重启的时候都要手动启动httpd服务)</p><p>要查看httpd服务的启动状态，可以使用命令：chkconfig –list httpd(会显示httpd在各个级别(level)下的启动状态)</p><h4 id="1、使用以下命令安装MySQL："><a href="#1、使用以下命令安装MySQL：" class="headerlink" title="1、使用以下命令安装MySQL："></a>1、使用以下命令安装MySQL：</h4><p>yum install mysql mysql-server<br>同样，如果出现提示已安装的话，就说明系统安装了MySQL了，可以跳过这一步，否则，系统接下来会自动安装MySQL。<br>安装完成了之后，启动MySQL：/etc/init.d/mysql start</p><p>将MySQL设置为开机启动：chkconfig mysqld on<br>最后，拷贝配置文件：cp /usr/share/mysql/my-medium.cnf /etc/my.cnf (在/etc下有个my.cnf文件，直接覆盖就行了)</p><p>1.2、用以下命令给root账户设置密码</p><p>mysql_secure_installation<br>根据提示输入2次密码，就设置成功了。注意，在设置过程中，会提示删除是否anonymous用户，是否拒绝root的远程访问，是否删除测试用的数据库等，这些都需要根据自己的实际情况进行选择。最后出现：Thanks for using MySQL!，设置密码成功了。</p><p>重新启动MySQL：/etc/init.d/mysqld restart</p><ol><li>3、mysql开启远程访问权限</li></ol><p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘myuser‘@’%’IDENTIFIED BY ‘mypassword’ WITH GRANT OPTION;</p><h4 id="2：安装PHP"><a href="#2：安装PHP" class="headerlink" title="2：安装PHP"></a><strong>2：安装PHP</strong></h4><p>2.1、使用以下命令安装PHP：</p><p>yum install php<br>根据提示往下安装就行了。安装完之后重新启动Apache：/etc/init.d/httpd restart<br>2.2、安装PHP组件，是PHP支持MySQL</p><p>可以使用命令：yum search php来查看PHP的组件，选择需要的模块进行安装：</p><p>yum install php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt</p><p>安装完之后，重启Apache：/etc/init.d/httpd restart</p><p>重启MySQL：/etc/init.d/mysqld restart</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客搭建 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> apache </tag>
+            
+            <tag> mysql </tag>
+            
+            <tag> php </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一个博客</title>
+      <link href="/2019/05/24/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2019/05/24/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<p>emmmmm….</p><p>第一个GitHub博客</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2019/05/24/hello-world/"/>
+      <url>/2019/05/24/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
