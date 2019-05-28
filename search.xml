@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>数据仓库架构</title>
+      <link href="/2019/05/28/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/"/>
+      <url>/2019/05/28/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<p>业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝</p><p>增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用）</p><p>ods : 贴源层</p><p>数据按天分区</p><p>dw(dwd,dws)为了支撑那些应用，那些查询</p><p>dwd:数据宽表</p><p>dws：汇总表</p><p>集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细<br>oozie调度 数据增量导入，定时跑任务</p><p>一层比一层粒度细 20个表-&gt; 200个表 </p><p>原材料 -&gt;&gt; 数据加工 -&gt; 产品</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hive </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据仓库 </tag>
+            
+            <tag> hive </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>transient</title>
       <link href="/2019/05/28/transient/"/>
       <url>/2019/05/28/transient/</url>
@@ -228,9 +255,9 @@
       
         <tags>
             
-            <tag> GC </tag>
-            
             <tag> jvm </tag>
+            
+            <tag> GC </tag>
             
         </tags>
       
@@ -255,11 +282,11 @@
       
         <tags>
             
+            <tag> GC </tag>
+            
             <tag> JAVA </tag>
             
             <tag> JVM </tag>
-            
-            <tag> GC </tag>
             
             <tag> spark </tag>
             
