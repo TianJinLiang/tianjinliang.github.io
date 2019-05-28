@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>scala 集合转换 java集合</title>
+      <link href="/2019/05/28/scala-%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2-java%E9%9B%86%E5%90%88/"/>
+      <url>/2019/05/28/scala-%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2-java%E9%9B%86%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<p>使用 scala.collection.JavaConverters 与Java集合交互。它有一系列的隐式转换，添加了asJava和asScala的转换方法。使用它们这些方法确保转换是显式的，有助于阅读：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.JavaConverters._</span><br><span class="line"></span><br><span class="line">val list: java.util.List[Int] = Seq(1,2,3,4).asJava</span><br><span class="line">val buffer: scala.collection.mutable.Buffer[Int] = list.asScala</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> spark </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spark </tag>
+            
+            <tag> scala </tag>
+            
+            <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sparksql处理小文件</title>
       <link href="/2019/05/28/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/"/>
       <url>/2019/05/28/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/</url>
@@ -49,9 +78,9 @@
       
         <tags>
             
-            <tag> 梯子 </tag>
-            
             <tag> linux </tag>
+            
+            <tag> 梯子 </tag>
             
         </tags>
       
