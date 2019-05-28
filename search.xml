@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>sparksql处理小文件</title>
+      <link href="/2019/05/28/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/"/>
+      <url>/2019/05/28/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<h4 id="spark处理方式一："><a href="#spark处理方式一：" class="headerlink" title="spark处理方式一："></a>spark处理方式一：</h4><p>val value: RDD[(Text, Text)] = sc.newAPIHadoopFile[Text,Text,CombineTextInputFormat](“hdfs://localhost:9000/test/hadoopkv1”)</p><h4 id="spark处理方式二："><a href="#spark处理方式二：" class="headerlink" title="spark处理方式二："></a>spark处理方式二：</h4><p>var hadoopConf = new Configuration()<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.maxsize”, “512000000”)<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.minsize”, “268435456”)<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.minsize.per.node”, “134217728”)   //下面这两参数可以不设置，详情看文章末尾<br>hadoopConf.set(“mapreduce.input.fileinputformat.split.minsize.per.rack”, “268435456”)</p><p>val data = sc.newAPIHadoopFile(args(1),<br>  classOf[CombineTextInputFormat],<br>  classOf[LongWritable],<br>  classOf[Text], hadoopConf)</p><h4 id="hive处理小文件："><a href="#hive处理小文件：" class="headerlink" title="hive处理小文件："></a>hive处理小文件：</h4><p>sparksession.sqlContext.setConf(“hive.merge.mapfiles”,”true”)<br>sparksession.sqlContext.setConf(“mapred.max.split.size”,”256000000”)<br>sparksession.sqlContext.setConf(“mapred.min.split.size.per.node”,”192000000”)<br>sparksession.sqlContext.setConf(“mapred.min.split.size.per.rack”,”192000000”)<br>sparksession.sqlContext.setConf(“hive.input.format”,”org.apache.hadoop.hive.ql.io.CombineHiveInputFormat”)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> spark </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spark </tag>
+            
+            <tag> sparksql </tag>
+            
+            <tag> 小文件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>自己搭建梯子</title>
       <link href="/2019/05/28/%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA%E6%A2%AF%E5%AD%90/"/>
       <url>/2019/05/28/%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA%E6%A2%AF%E5%AD%90/</url>
