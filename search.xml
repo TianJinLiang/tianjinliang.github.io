@@ -8,7 +8,7 @@
       <link href="/2019/05/28/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/"/>
       <url>/2019/05/28/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/</url>
       
-        <content type="html"><![CDATA[<p>业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝</p><p>增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用）</p><p>ods : 贴源层，维度表（dim）</p><p>数据按天分区</p><p>dw(dwd,dws)为了支撑那些应用，那些查询</p><p>dwd:数据宽表</p><p>dws：汇总表</p><p>集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细<br>oozie调度 数据增量导入，定时跑任务</p><p>一层比一层粒度细 20个表-&gt; 200个表 </p><p>原材料 -&gt;&gt; 数据加工 -&gt; 产品</p>]]></content>
+        <content type="html"><![CDATA[<p>业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝</p><p>增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用）</p><p>ods : 贴源层，维度表（dim）</p><p>数据按天分区</p><p>dw(dwd,dws)为了支撑那些应用，那些查询</p><p>dwd:数据宽表</p><p>dws：汇总表</p><p>集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细<br>oozie调度 数据增量导入，定时跑任务，cattle（数据迁移，数据增量导入，流程监控）</p><p>一层比一层粒度细 20个表-&gt; 200个表 </p><p>原材料 -&gt;&gt; 数据加工 -&gt; 产品</p>]]></content>
       
       
       <categories>
@@ -108,6 +108,33 @@
             <tag> sparksql </tag>
             
             <tag> 小文件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hadoop1.x与hadoop2.x的区别</title>
+      <link href="/2017/03/28/hadoop1-x%E4%B8%8Ehadoop2-x%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+      <url>/2017/03/28/hadoop1-x%E4%B8%8Ehadoop2-x%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<p>​    （1）Hadoop 1.0Hadoop 1.0即第一代Hadoop，由分布式存储系统HDFS和分布式计算框架MapReduce组成，其中，HDFS由一个NameNode和多个DataNode组成，MapReduce由一个JobTracker和多个TaskTracker组成，对应Hadoop版本为Apache Hadoop 0.20.x、1.x、0.21.X、0.22.x和CDH3。</p><p>​    （2）Hadoop 2.0Hadoop 2.0即第二代Hadoop，为克服Hadoop 1.0中HDFS和MapReduce存在的各种问题而提出的。针对Hadoop 1.0中的单NameNode制约HDFS的扩展性问题，提出了HDFS Federation，它让多个NameNode分管不同的目录进而实现访问隔离和横向扩展，同时它彻底解决了NameNode 单点故障问题；针对Hadoop 1.0中的MapReduce在扩展性和多框架支持等方面的不足，它将JobTracker中的资源管理和作业控制功能分开，分别由组件ResourceManager和ApplicationMaster实现，其中，ResourceManager负责所有应用程序的资源分配，而ApplicationMaster仅负责管理一个应用程序，进而诞生了全新的通用资源管理框架YARN。基于YARN，用户可以运行各种类型的应用程序（不再像1.0那样仅局限于MapReduce一类应用），从离线计算的MapReduce到在线计算（流式处理）的Storm等。Hadoop 2.0对应Hadoop版本为Apache Hadoop 0.23.x、2.x和CDH4。</p><p>​    （3）MapReduce 1.0或MRv1MapReduce 1.0计算框架主要由三部分组成，分别是编程模型、数据处理引擎和运行时环境。它的基本编程模型是将问题抽象成Map和Reduce两个阶段，其中Map阶段将输入数据解析成key/value，迭代调用map()函数处理后，再以key/value的形式输出到本地目录，而Reduce阶段则将key相同的value进行规约处理，并将最终结果写到HDFS上；它的数据处理引擎由MapTask和ReduceTask组成，分别负责Map阶段逻辑和Reduce阶段逻辑的处理；它的运行时环境由（一个）JobTracker和（若干个）TaskTracker两类服务组成，其中，JobTracker负责资源管理和所有作业的控制，而TaskTracker负责接收来自JobTracker的命令并执行它。该框架在扩展性、容错性和多框架支持等方面存在不足，这也促使了MRv2的产生。</p><p>​    （4）MRv2MRv2具有与MRv1相同的编程模型和数据处理引擎，唯一不同的是运行时环境。MRv2是在MRv1基础上经加工之后，运行于资源管理框架YARN之上的计算框架MapReduce。它的运行时环境不再由JobTracker和TaskTracker等服务组成，而是变为通用资源管理系统YARN和作业控制进程ApplicationMaster，其中，YARN负责资源管理和调度，而ApplicationMaster仅负责一个作业的管理。简言之，MRv1仅是一个独立的离线计算框架，而MRv2则是运行于YARN之上的MapReduce。</p><p>​    （5）YARNYARN是Hadoop 2.0中的资源管理系统，它是一个通用的资源管理模块，可为各类应用程序进行资源管理和调度。YARN不仅限于MapReduce一种框架使用，也可以供其他框架使用，比如Tez（将在第9章介绍）、Spark、Storm（将在第10章介绍）等。YARN类似于几年前的资源管理系统Mesos（将在12章介绍）和更早的Torque（将在6章介绍）。由于YARN的通用性，下一代MapReduce的核心已经从简单的支持单一应用的计算框架MapReduce转移到通用的资源管理系统YARN。</p><p>​    （6）HDFS FederationHadoop 2.0中对HDFS进行了改进，使NameNode可以横向扩展成多个，每个NameNode分管一部分目录，进而产生了HDFS Federation，该机制的引入不仅增强了HDFS的扩展性，也使HDFS具备了隔离性。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hadoop </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+            <tag> bigdata </tag>
             
         </tags>
       
@@ -276,6 +303,33 @@
             <tag> GC </tag>
             
             <tag> spark </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java中volatile关键字的含义</title>
+      <link href="/2016/05/28/java%E4%B8%ADvolatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%90%AB%E4%B9%89/"/>
+      <url>/2016/05/28/java%E4%B8%ADvolatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%90%AB%E4%B9%89/</url>
+      
+        <content type="html"><![CDATA[<p><strong>synchronized</strong> </p><p>同步块大家都比较熟悉，通过 synchronized 关键字来实现，所有加上synchronized 和 块语句，在多线程访问的时候，同一时刻只能有一个线程能够用</p><p>synchronized 修饰的方法 或者 代码块。</p><p><strong>volatile</strong></p><p>用volatile修饰的变量，线程在每次使用变量的时候，都会读取变量修改后的最的值。volatile很容易被误用，用来进行原子性操作。</p><p>例子，我们实现一个计数器，每次线程启动的时候，会调用计数器inc方法，对计数器进行加一</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Counter &#123;</span><br><span class="line"> </span><br><span class="line">    public static int count = 0;</span><br><span class="line"> </span><br><span class="line">    public static void inc() &#123;</span><br><span class="line"> </span><br><span class="line">        //这里延迟1毫秒，使得结果明显</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(1);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"> </span><br><span class="line">        //同时启动1000个线程，去进行i++计算，看看实际结果</span><br><span class="line"> </span><br><span class="line">        for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">            new Thread(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    Counter.inc();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        //这里每次运行的值都有可能不同,可能为1000</span><br><span class="line">        System.out.println(&quot;运行结果:Counter.count=&quot; + Counter.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">运行结果:Counter.count=995</span><br><span class="line">实际运算结果每次可能都不一样，本机的结果为：运行结果:Counter.count=995，可以看出，在多线程的环境下，Counter.count并没有期望结果是1000</span><br><span class="line">很多人以为，这个是多线程并发问题，只需要在变量count之前加上volatile就可以避免这个问题，那我们在修改代码看看，看看结果是不是符合我们的期望</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Counter &#123;</span><br><span class="line"> </span><br><span class="line">    public volatile static int count = 0;</span><br><span class="line"> </span><br><span class="line">    public static void inc() &#123;</span><br><span class="line"> </span><br><span class="line">        //这里延迟1毫秒，使得结果明显</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(1);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"> </span><br><span class="line">        //同时启动1000个线程，去进行i++计算，看看实际结果</span><br><span class="line"> </span><br><span class="line">        for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">            new Thread(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    Counter.inc();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        //这里每次运行的值都有可能不同,可能为1000</span><br><span class="line">        System.out.println(&quot;运行结果:Counter.count=&quot; + Counter.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行结果:Counter.count=992</p><p>运行结果还是没有我们期望的1000，下面我们分析一下原因</p><p>在 java 垃圾回收整理一文中，描述了jvm运行时刻内存的分配。其中有一个内存区域是jvm虚拟机栈，每一个线程运行时都有一个线程栈，</p><p>线程栈保存了线程运行时候变量值信息。当线程访问某一个对象时候值的时候，首先通过对象的引用找到对应在堆内存的变量的值，然后把堆内存</p><p>变量的具体值load到线程本地内存中，建立一个变量副本，之后线程就不再和对象在堆内存变量值有任何关系，而是直接修改副本变量的值，</p><p>在修改完之后的某一个时刻（线程退出之前），自动把线程变量副本的值回写到对象在堆中变量。这样在堆中的对象的值就产生变化了。下面一幅图</p><p>描述这写交互</p><p><a href="http://images.cnblogs.com/cnblogs_com/aigongsi/201204/201204011757234696.jpg" target="_blank" rel="noopener"><img src="https://images.cnblogs.com/cnblogs_com/aigongsi/201204/201204011757235219.jpg" alt="java volatile1"></a></p><p>read and load 从主存复制变量到当前工作内存<br>use and assign  执行代码，改变共享变量值<br>store and write 用工作内存数据刷新主存相关内容</p><p>其中use and assign 可以多次出现</p><p>但是这一些操作并不是原子性，也就是 在read load之后，如果主内存count变量发生修改之后，线程工作内存中的值由于已经加载，不会产生对应的变化，所以计算出来的结果会和预期不一样</p><p>对于volatile修饰的变量，jvm虚拟机只是保证从主内存加载到线程工作内存的值是最新的</p><p>例如假如线程1，线程2 在进行read,load 操作中，发现主内存中count的值都是5，那么都会加载这个最新的值</p><p>在线程1堆count进行修改之后，会write到主内存中，主内存中的count变量就会变为6</p><p>线程2由于已经进行read,load操作，在进行运算之后，也会更新主内存count的变量值为6</p><p>导致两个线程及时用volatile关键字修改之后，还是会存在并发的情况。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> volatile </tag>
             
         </tags>
       

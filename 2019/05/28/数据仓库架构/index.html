@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务 一层比">
+<meta name="description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务，cat">
 <meta name="keywords" content="数据仓库,hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据仓库架构">
 <meta property="og:url" content="http://yoursite.com/2019/05/28/数据仓库架构/index.html">
 <meta property="og:site_name" content="良心博客">
-<meta property="og:description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务 一层比">
+<meta property="og:description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务，cat">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-28T09:38:30.274Z">
+<meta property="og:updated_time" content="2019-05-28T10:04:12.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据仓库架构">
-<meta name="twitter:description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务 一层比">
+<meta name="twitter:description" content="业务系统数据：司法信息，工商信息，社保公积金，运营商，淘宝 增量数据导入到ods层（sparkstreaming任务，sqoop任务，接口调用） ods : 贴源层，维度表（dim） 数据按天分区 dw(dwd,dws)为了支撑那些应用，那些查询 dwd:数据宽表 dws：汇总表 集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细oozie调度 数据增量导入，定时跑任务，cat">
 
 
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  147
+                  162
                 </span>
               
 
@@ -468,7 +468,7 @@
 <p>dw(dwd,dws)为了支撑那些应用，那些查询</p>
 <p>dwd:数据宽表</p>
 <p>dws：汇总表</p>
-<p>集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细<br>oozie调度 数据增量导入，定时跑任务</p>
+<p>集市(由dws生成) 面向主题，面向应用。支撑了95%的查询，粒度更细<br>oozie调度 数据增量导入，定时跑任务，cattle（数据迁移，数据增量导入，流程监控）</p>
 <p>一层比一层粒度细 20个表-&gt; 200个表 </p>
 <p>原材料 -&gt;&gt; 数据加工 -&gt; 产品</p>
 
@@ -651,7 +651,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -662,7 +662,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -673,7 +673,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -769,7 +769,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.8k字</span>
+  <span class="post-count">博客全站共13.9k字</span>
 </div>
 
         
