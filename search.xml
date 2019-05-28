@@ -4,6 +4,89 @@
   
     
     <entry>
+      <title>GC 日志分析</title>
+      <link href="/2019/05/28/GC-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+      <url>/2019/05/28/GC-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<p>​    2017-07-20T16:32:19.836+0800: 1216.559: [GC pause (G1 Evacuation Pause) (young), 0.0797857 secs]<br>​    这是最顶层的信息，它告诉我们这是一个从进程启动后1216.559秒开始的一个疏散暂停，在这时年轻代所有的区域被疏散，如Eden和Survivor。这次收集用了0.0797857秒完成的。</p><p>[Parallel Time: 58.5 ms, GC Workers: 8]<br>并行时间是所有并行GC工作线程所花费的总时间</p><p>[GC Worker Start (ms): Min: 1216567.9, Avg: 1216568.1, Max: 1216568.4, Diff: 0.5]<br>所有工作线程的平均、最小、最大和差异时间</p><p>……</p><p>[Eden: 180.0M(180.0M)-&gt;0.0B(178.0M) Survivors: 26.0M-&gt;16.0M Heap: 432.5M(512.0M)-&gt;262.5M(512.0M)]<br>这显示了Eden占用了180M，在收集前它的容量也是180M。收集之后，它的容量降到了0，自所有对象从Eden区疏散/晋升后。它的目标大小增长到了178M,<br>Survivors收集之后Survivor从26M变到16M，<br>Heap堆空间总占有量和总容量分别是432M和512M回收之前，回收之后分别变为262和512M。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> jvm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> jvm </tag>
+            
+            <tag> GC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Springboot 环境配置</title>
+      <link href="/2019/05/28/Springboot-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <url>/2019/05/28/Springboot-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h4 id="resource中常见有几种环境配置文件"><a href="#resource中常见有几种环境配置文件" class="headerlink" title="resource中常见有几种环境配置文件"></a><strong>resource中常见有几种环境配置文件</strong></h4><p>​    application-dev.yml（开发环境）<br>     application-test.yml（测试环境）<br>     application-uat.yml（预发布）<br>     application-pro.yml（生产环境）<br>     application.yml</p><h4 id="使用多环境配置有三种方式："><a href="#使用多环境配置有三种方式：" class="headerlink" title="使用多环境配置有三种方式："></a><strong>使用多环境配置有三种方式</strong>：</h4><ol><li>使用@PropertySource注解<br>@PropertySource(classpath:application-dev.yml)</li><li><p>修改spring.profiles.active属性：</p><p>spring.profiles.active:dev</p></li><li><p>执行命令行<br>通过命令行可以直接指定某一配置文件<br>例：java -jar xxx.jar –spring.profiles.active=test</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> springboot </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> springboot </tag>
+            
+            <tag> 环境 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>spark 数据倾斜（Data Skew）</title>
+      <link href="/2019/05/28/spark-%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%EF%BC%88Data-Skew%EF%BC%89/"/>
+      <url>/2019/05/28/spark-%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%EF%BC%88Data-Skew%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h4 id="0、前言"><a href="#0、前言" class="headerlink" title="0、前言"></a>0、前言</h4><p>​    何谓数据倾斜？数据倾斜指的是，并行处理的数据集中，某一部分（如Spark或Kafka的一个Partition）的数据显著多于其它部分，从而使得该部分的处理速度成为整个数据集处理的瓶颈。</p><p>​    数据倾斜的原理很简单：在进行shuffle的时候，必须将各个节点上相同的key拉取到某个节点上的一个task来进行处理，比如按照key进行聚合或join等操作。此时如果某个key对应的数据量特别大的话，就会发生数据倾斜。比如大部分key对应10条数据，但是个别key却对应了100万条数据，那么大部分task可能就只会分配到10条数据，然后1秒钟就运行完了；但是个别task可能分配到了100万数据，要运行一两个小时。因此，整个Spark作业的运行进度是由运行时间最长的那个task决定的。</p><p><strong>1 数据倾斜直接会导致一种情况：Out Of Memory。</strong></p><p><strong>2 运行速度慢,特别慢，非常慢，极端的慢，不可接受的慢</strong></p><p>搞定数据倾斜需要：</p><p>1 搞定shuffle</p><p>2 搞定业务场景</p><p>3 搞定 cpu core的使用情况</p><p>4 搞定OOM的根本原因等。</p><p>​    </p><p>​    一个经验结论是：一般情况下，OOM的原因都是数据倾斜。某个task任务数据量太大，GC的压力就很大。这比不了Kafka,因为kafka的内存是不经过JVM的。是基于Linux内核的Page.</p><p>​    <strong>如何定位导致数据倾斜的代码？</strong></p><p>​    数据倾斜只会发生在shuffle过程中。这里给大家罗列一些常用的并且可能会触发shuffle操作的算子：distinct、groupByKey、reduceByKey、aggregateByKey、join、cogroup、repartition等。出现数据倾斜时，可能就是你的代码中使用了这些算子中的某一个所导致的。</p><p>​    举例来说，对于上面所说的单词计数程序，如果确定了是stage1的reduceByKey算子导致了数据倾斜，那么就应该看看进行reduceByKey操作的RDD中的key分布情况，在这个例子中指的就是pairs RDD。如下示例，我们可以先对pairs采样10%的样本数据，然后使用countByKey算子统计出每个key出现的次数，最后在客户端遍历和打印样本数据中各个key的出现次数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val sampledPairs = pairs.sample(false, 0.1)</span><br><span class="line"></span><br><span class="line">val sampledWordCounts = sampledPairs.countByKey()</span><br><span class="line"></span><br><span class="line">sampledWordCounts.foreach(println(_))</span><br></pre></td></tr></table></figure><h4 id="1、如何缓解-消除数据倾斜？"><a href="#1、如何缓解-消除数据倾斜？" class="headerlink" title="1、如何缓解/消除数据倾斜？"></a><strong>1、如何缓解/消除数据倾斜？</strong></h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p><strong>尽量避免数据源的数据倾斜</strong><br>​    比如数据源是Kafka</p><p>​    以Spark Stream通过DirectStream方式读取Kafka数据为例。由于Kafka的每一个Partition对应Spark的一个Task（Partition），所以Kafka内相关Topic的各Partition之间数据是否平衡，直接决定Spark处理该数据时是否会产生数据倾斜。</p><p>​    Kafka某一Topic内消息在不同Partition之间的分布，主要由Producer端所使用的Partition实现类决定。如果使用随机Partitioner，则每条消息会随机发送到一个Partition中，从而从概率上来讲，各Partition间的数据会达到平衡。此时源Stage（直接读取Kafka数据的Stage）不会产生数据倾斜。</p><p><strong>解决方案：</strong></p><p>​    将Spark作业的shuffle操作提前到了Hive ETL中，从而让Spark直接使用预处理的Hive中间表，尽可能地减少Spark的shuffle操作，大幅度提升了性能</p><p><strong>方案优点</strong>：实现起来简单便捷，效果还非常好，完全规避掉了数据倾斜，Spark作业的性能会大幅度提升。</p><p><strong>方案缺点</strong>：治标不治本，Hive ETL中还是会发生数据倾斜。</p><h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p><strong>调整并行度分散同一个Task的不同Key</strong><br><strong>案适用场景</strong>：如果我们必须要对数据倾斜迎难而上，那么建议优先使用这种方案，因为这是处理数据倾斜最简单的一种方案。</p><p><strong>方案实现思路</strong>：在对RDD执行shuffle算子时，给shuffle算子传入一个参数，比如reduceByKey(1000)，该参数就设置了这个shuffle算子执行时shuffle read task的数量。对于Spark SQL中的shuffle类语句，比如group by、join等，需要设置一个参数，即spark.sql.shuffle.partitions，该参数代表了shuffle read task的并行度，该值默认是200，对于很多场景来说都有点过小。</p><p><strong>原理</strong></p><p>​    Spark在做Shuffle时，默认使用HashPartitioner（非Hash Shuffle）对数据进行分区。如果并行度设置的不合适，可能造成大量不相同的Key对应的数据被分配到了同一个Task上，造成该Task所处理的数据远大于其它Task，从而造成数据倾斜。</p><p><strong>优势</strong></p><p>​    实现简单，可在需要Shuffle的操作算子上直接设置并行度或者使用spark.default.parallelism设置。如果是Spark SQL，还可通过SET spark.sql.shuffle.partitions=[num_tasks]设置并行度。可用最小的代价解决问题。一般如果出现数据倾斜，都可以通过这种方法先试验几次，如果问题未解决，再尝试其它方法。</p><p><strong>劣势</strong></p><p>​    适用场景少，只能将分配到同一Task的不同Key分散开，但对于同一Key倾斜严重的情况该方法并不适用。并且该方法一般只能缓解数据倾斜，没有彻底消除问题。从实践经验来看，其效果一般。</p><h5 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a><strong>方式三</strong></h5><p><strong>自定义Partitioner</strong><br><strong>原理</strong></p><p>​    使用自定义的Partitioner（默认为HashPartitioner），将原本被分配到同一个Task的不同Key分配到不同Task。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class CustomerPartitioner(numParts:Int) extends org.apache.spark.Partitioner &#123;</span><br><span class="line"></span><br><span class="line">//覆盖分区数</span><br><span class="line"></span><br><span class="line">override def numPartitions: Int = numParts</span><br><span class="line"></span><br><span class="line">//覆盖分区号获取函数</span><br><span class="line"></span><br><span class="line">override def getPartition(key: Any): Int = &#123;</span><br><span class="line"></span><br><span class="line">val id: Int = key.toString.toInt</span><br><span class="line"></span><br><span class="line">if (id = 900000)</span><br><span class="line"></span><br><span class="line">return new java.util.Random().nextInt(100) % 12</span><br><span class="line"></span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">return id % 12</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>优势</strong></p><p>​    不影响原有的并行度设计。如果改变并行度，后续Stage的并行度也会默认改变，可能会影响后续Stage。</p><p><strong>劣势</strong></p><p>​    适用场景有限，只能将不同Key分散开，对于同一Key对应数据集非常大的场景不适用。效果与调整并行度类似，只能缓解数据倾斜而不能完全消除数据倾斜。而且需要根据数据特点自定义专用的Partitioner，不够灵活。</p><h5 id><a href="#" class="headerlink" title=" "></a> </h5><h5 id="方式四"><a href="#方式四" class="headerlink" title="方式四"></a>方式四</h5><p><strong>将Reduce side Join转变为Map side Join</strong><br><strong>方案适用场景</strong>：在对RDD使用join类操作，或者是在Spark SQL中使用join语句时，而且join操作中的一个RDD或表的数据量比较小（比如几百M或者一两G），比较适用此方案。</p><p><strong>方案优点</strong>：对join操作导致的数据倾斜，效果非常好，因为根本就不会发生shuffle，也就根本不会发生数据倾斜。</p><p><strong>方案缺点</strong>：适用场景较少，因为这个方案只适用于一个大表和一个小表的情况。毕竟我们需要将小表进行广播，此时会比较消耗内存资源，driver和每个Executor内存中都会驻留一份小RDD的全量数据。如果我们广播出去的RDD数据比较大，比如10G以上，那么就可能发生内存溢出了。因此并不适合两个都是大表的情况。</p><h5 id="方式五"><a href="#方式五" class="headerlink" title="方式五"></a><strong>方式五</strong></h5><p><strong>两阶段聚合（局部聚合+全局聚合）</strong><br><strong>方案适用场景</strong>：对RDD执行reduceByKey等聚合类shuffle算子或者在Spark SQL中使用group by语句进行分组聚合时，比较适用这种方案。</p><p>​    比如(hello, 1) (hello, 1) (hello, 1) (hello, 1)，就会变成(1_hello, 1) (1_hello, 1) (2_hello, 1) (2_hello, 1)。接着对打上随机数后的数据，执行reduceByKey等聚合操作，进行局部聚合，那么局部聚合结果，就会变成了(1_hello, 2) (2_hello, 2)。然后将各个key的前缀给去掉，就会变成(hello,2)(hello,2)，再次进行全局聚合操作，就可以得到最终结果了，比如(hello, 4)。</p><p><strong>方案优点</strong>：对于聚合类的shuffle操作导致的数据倾斜，效果是非常不错的。通常都可以解决掉数据倾斜，或者至少是大幅度缓解数据倾斜，将Spark作业的性能提升数倍以上。</p><p><strong>方案缺点</strong>：仅仅适用于聚合类的shuffle操作，适用范围相对较窄。如果是join类的shuffle操作，还得用其他的解决方案。</p><h5 id="方式六"><a href="#方式六" class="headerlink" title="方式六"></a>方式六</h5><p><strong>为数据倾斜的key增加随机前/后缀</strong><br><strong>原理</strong></p><p>​    为数据量特别大的Key增加随机前/后缀，使得原来Key相同的数据变为Key不相同的数据，从而使倾斜的数据集分散到不同的Task中，彻底解决数据倾斜问题。Join另一侧的数据中，与倾斜Key对应的部分数据，与随机前缀集作笛卡尔乘积，从而保证无论数据倾斜侧倾斜Key如何加前缀，都能与之正常Join。</p><p><strong>适用场景</strong></p><p>​    两张表都比较大，无法使用Map则Join。其中一个RDD有少数几个Key的数据量过大，另外一个RDD的Key分布较为均匀。</p><p><strong>解决方案</strong></p><p>​    将有数据倾斜的RDD中倾斜Key对应的数据集单独抽取出来加上随机前缀，另外一个RDD每条数据分别与随机前缀结合形成新的RDD（相当于将其数据增到到原来的N倍，N即为随机前缀的总个数），然后将二者Join并去掉前缀。然后将不包含倾斜Key的剩余数据进行Join。最后将两次Join的结果集通过union合并，即可得到全部Join结果。</p><p><strong>优势</strong></p><p>相对于Map则Join，更能适应大数据集的Join。如果资源充足，倾斜部分数据集与非倾斜部分数据集可并行进行，效率提升明显。且只针对倾斜部分的数据做数据扩展，增加的资源消耗有限。</p><p><strong>劣势</strong></p><p>如果倾斜Key非常多，则另一侧数据膨胀非常大，此方案不适用。而且此时对倾斜Key与非倾斜Key分开处理，需要扫描数据集两遍，增加了开销。</p><h5 id="方式七"><a href="#方式七" class="headerlink" title="方式七"></a>方式七</h5><p><strong>使用随机前缀和扩容RDD进行join</strong><br><strong>方案适用场景</strong>：如果在进行join操作时，RDD中有大量的key导致数据倾斜，那么进行分拆key也没什么意义，此时就只能使用最后一种方案来解决问题了。</p><p>​    将该RDD的每条数据都打上一个n以内的随机前缀。同时对另外一个正常的RDD进行扩容，将每条数据都扩容成n条数据，扩容出来的每条数据都依次打上一个0~n的前缀。</p><p><strong>方案优点</strong>：对join类型的数据倾斜基本都可以处理，而且效果也相对比较显著，性能提升效果非常不错。</p><p><strong>方案缺点</strong>：该方案更多的是缓解数据倾斜，而不是彻底避免数据倾斜。而且需要对整个RDD进行扩容，对内存资源要求很高。</p><h5 id="方式八"><a href="#方式八" class="headerlink" title="方式八"></a>方式八</h5><p><strong>采样倾斜key并分拆join操作</strong><br><strong>方案实现思路</strong>：</p><p>​    对包含少数几个数据量过大的key的那个RDD，通过sample算子采样出一份样本来，然后统计一下每个key的数量，计算出来数据量最大的是哪几个key。</p><p>​    然后将这几个key对应的数据从原来的RDD中拆分出来，形成一个单独的RDD，并给每个key都打上n以内的随机数作为前缀，而不会导致倾斜的大部分key形成另外一个RDD。</p><p>​    接着将需要join的另一个RDD，也过滤出来那几个倾斜key对应的数据并形成一个单独的RDD，将每条数据膨胀成n条数据，这n条数据都按顺序附加一个0~n的前缀，不会导致倾斜的大部分key也形成另外一个RDD。</p><p>​    再将附加了随机前缀的独立RDD与另一个膨胀n倍的独立RDD进行join，此时就可以将原先相同的key打散成n份，分散到多个task中去进行join了。而另外两个普通的RDD就照常join即可。最后将两次join的结果使用union算子合并起来即可，就是最终的join结果。</p><p><strong>方案实现原理</strong>：对于join导致的数据倾斜，如果只是某几个key导致了倾斜，可以将少数几个key分拆成独立RDD，并附加随机前缀打散成n份去进行join，此时这几个key对应的数据就不会集中在少数几个task上，而是分散到多个task进行join了。具体原理见下图。</p><p><strong>方案优点</strong>：对于join导致的数据倾斜，如果只是某几个key导致了倾斜，采用该方式可以用最有效的方式打散key进行join。而且只需要针对少数倾斜key对应的数据进行扩容n倍，不需要对全量数据进行扩容。避免了占用过多内存。</p><p><strong>方案缺点</strong>：如果导致倾斜的key特别多的话，比如成千上万个key都导致数据倾斜，那么这种方式也不适合。</p><h5 id="方式九"><a href="#方式九" class="headerlink" title="方式九"></a>方式九</h5><p><strong>过滤少数导致倾斜的key</strong><br><strong>方案适用场景</strong>：如果发现导致倾斜的key就少数几个，而且对计算本身的影响并不大的话，那么很适合使用这种方案。比如99%的key就对应10条数据，但是只有一个key对应了100万数据，从而导致了数据倾斜。</p><p><strong>方案优点</strong>：实现简单，而且效果也很好，可以完全规避掉数据倾斜。</p><p><strong>方案缺点</strong>：适用场景不多，大多数情况下，导致倾斜的key还是很多的，并不是只有少数几个。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> spark </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spark </tag>
+            
+            <tag> 数据倾斜 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>spark on yarn</title>
       <link href="/2019/05/28/spark-on-yarn/"/>
       <url>/2019/05/28/spark-on-yarn/</url>
@@ -101,13 +184,13 @@
       
         <tags>
             
-            <tag> JAVA </tag>
-            
-            <tag> JVM </tag>
-            
             <tag> GC </tag>
             
             <tag> spark </tag>
+            
+            <tag> JAVA </tag>
+            
+            <tag> JVM </tag>
             
         </tags>
       
