@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JAVA,JVM,GC,spark,">
 
 
 
@@ -93,16 +93,18 @@
 
 
 
-<meta name="description" content="好记性不如烂笔头">
-<meta property="og:type" content="website">
-<meta property="og:title" content="良心博客">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+<meta name="description" content="1、参数设置背景123	在做java开发时尤其是大型软件开发时经常会遇到内存溢出的问题，比如说OutOfMemoryError等。这是个让开发人员很痛苦、也很纠结的问题，因为我们有时不知道什么样的操作导致了这种问题的发生。所以我们不得不通过不断的审查、优化自己的代码结构。但是有时我们会发现有些时候不单单是通过重构自身的代码就能够解决这样的问题，因为也可能是由于我们对java虚拟机运行时的内存分配的">
+<meta name="keywords" content="JAVA,JVM,GC,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/index.html">
 <meta property="og:site_name" content="良心博客">
-<meta property="og:description" content="好记性不如烂笔头">
+<meta property="og:description" content="1、参数设置背景123	在做java开发时尤其是大型软件开发时经常会遇到内存溢出的问题，比如说OutOfMemoryError等。这是个让开发人员很痛苦、也很纠结的问题，因为我们有时不知道什么样的操作导致了这种问题的发生。所以我们不得不通过不断的审查、优化自己的代码结构。但是有时我们会发现有些时候不单单是通过重构自身的代码就能够解决这样的问题，因为也可能是由于我们对java虚拟机运行时的内存分配的">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-28T06:31:24.349Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="良心博客">
-<meta name="twitter:description" content="好记性不如烂笔头">
+<meta name="twitter:title" content="JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别">
+<meta name="twitter:description" content="1、参数设置背景123	在做java开发时尤其是大型软件开发时经常会遇到内存溢出的问题，比如说OutOfMemoryError等。这是个让开发人员很痛苦、也很纠结的问题，因为我们有时不知道什么样的操作导致了这种问题的发生。所以我们不得不通过不断的审查、优化自己的代码结构。但是有时我们会发现有些时候不单单是通过重构自身的代码就能够解决这样的问题，因为也可能是由于我们对java虚拟机运行时的内存分配的">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/">
 
 
 
 
 
-  <title>归档 | 良心博客</title>
+  <title>JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别 | 良心博客</title>
   
 
 
@@ -157,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	
 	<a href="https://https://github.com/TianJinLiang" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -315,352 +317,316 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TianJinLiang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/blog-logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="良心博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T14:22:13+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/spark-on-yarn/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">spark on yarn</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T15:21:44+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/spark的Shuffle过程介绍/" itemprop="url">
-              
-                <span itemprop="name">spark的Shuffle过程介绍</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T14:36:10+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/Spark通信架构/" itemprop="url">
-              
-                <span itemprop="name">Spark通信架构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T14:33:03+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h4 id="1、参数设置背景"><a href="#1、参数设置背景" class="headerlink" title="1、参数设置背景"></a>1、参数设置背景</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	在做java开发时尤其是大型软件开发时经常会遇到内存溢出的问题，比如说OutOfMemoryError等。这是个让开发人员很痛苦、也很纠结的问题，因为我们有时不知道什么样的操作导致了这种问题的发生。所以我们不得不通过不断的审查、优化自己的代码结构。但是有时我们会发现有些时候不单单是通过重构自身的代码就能够解决这样的问题，因为也可能是由于我们对java虚拟机运行时的内存分配的不得当导致了内存溢出现象的不断发生。</span><br><span class="line"></span><br><span class="line">为了解决这一问题，java开发团队提供了一个用户自定义的方式按需配置java虚拟机运行时的所需的内存——通过参数配置的形式实现参数分配自定义化。</span><br></pre></td></tr></table></figure>
+<h4 id="2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分："><a href="#2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分：" class="headerlink" title="2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分："></a>2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分：</h4><pre><code>堆区即为通过new的方式创建的对象（类实例）所占用的内存空间，非堆区即为代码、常量、外部访问（如文件访问流所占资源）等
+</code></pre><p>​    虽然java的垃圾回收机制虽然能够很好的解决内存浪费的问题，但是这种机制也仅仅的是回收堆区的资源，而对于非堆区的资源就束手无策了，针对这样的资源回收只能凭借开发人员自身的约束来解决。就算是这样（堆区有java回收机制、非堆区开发人员能够很好的解决），当运行时所需内存瞬间激增的时候JVM无奈的也要中止程序的运行。所以本文讲述的是如何解决后者的问题。<br>常见参数种类（配置内存）</p>
+<pre><code>配置堆区：-Xms 、-Xmx、-XX:newSize、-XX:MaxnewSize、-Xmn
+配置非堆区：-XX:PermSize、-XX:MaxPermSize
+</code></pre><h5 id="2-1、堆区参数配置"><a href="#2-1、堆区参数配置" class="headerlink" title="2.1、堆区参数配置"></a>2.1、堆区参数配置</h5><ul>
+<li>2.11、-Xms ：表示java虚拟机堆区内存初始内存分配的大小，通常为操作系统可用内存的1/64大小即可，但仍需按照实际情况进行分配。有可能真的按照这样的一个规则分配时，设计出的软件还没有能够运行得起来就挂了。</li>
+<li><p>2.12、-Xmx： 表示java虚拟机堆区内存可被分配的最大上限，通常为操作系统可用内存的1/4大小。但是开发过程中，通常会将 -Xms 与 -Xmx两个参数的配置相同的值，其目的是为了能够在java垃圾回收机制清理完堆区后不需要重新分隔计算堆区的大小而浪费资源。</p>
+<p>  一般来讲对于堆区的内存分配只需要对上述两个参数进行合理配置即可。</p>
+</li>
+</ul>
+<h5 id="2-2、非堆区参数配置"><a href="#2-2、非堆区参数配置" class="headerlink" title="2.2、非堆区参数配置"></a>2.2、非堆区参数配置</h5><ul>
+<li>1、-XX:PermSize：表示非堆区初始内存分配大小，其缩写为permanent size（持久化内存）</li>
+<li>2、-XX:MaxPermSize：表示对非堆区分配的内存的最大上限<ul>
+<li>注：在配置之前一定要慎重的考虑一下自身软件所需要的非堆区内存大小，因为此处内存是不会被java垃圾回收机制进行处理的地方。并且更加要注意的是 最大堆内存与最大非堆内存的和绝对不能够超出操作系统的可用内存。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、jvm-参数配置"><a href="#3、jvm-参数配置" class="headerlink" title="3、jvm 参数配置"></a>3、jvm 参数配置</h4><ul>
+<li><p>1、-Xms：表示java虚拟机堆区内存初始内存分配的大小，通常为操作系统可用内存的1/64大小即可，但仍需按照实际情况进行分配。</p>
+</li>
+<li><p>2、-Xmx：表示java虚拟机堆区内存可被分配的最大上限，通常为操作系统可用内存的1/4大小。</p>
+<ul>
+<li>开发过程中，通常会将-Xms 与-Xmx两个参数的配置相同的值，其目的是为了能够在java垃圾回收机制清理完堆区后不需要重新分隔计算堆区的大小而浪费资源。</li>
+</ul>
+<p>1、-XX:newSize：表示新生代初始内存的大小，应该小于-Xms的值；<br>2、-XX:MaxnewSize：表示新生代可被分配的内存的最大上限；当然这个值应该小于-Xmx的值；<br>3、-Xmn：至于这个参数则是对 -XX:newSize、-XX:MaxnewSize两个参数的同时配置，也就是说如果通过-Xmn来配置新生代的内存大小，那么-XX:newSize = -XX:MaxnewSize　=　-Xmn，虽然会很方便，但需要注意的是这个参数是在JDK1.4版本以后才使用的。</p>
+</li>
+</ul>
+<h5 id="3-1、java虚拟机对非堆区内存配置的两个参数："><a href="#3-1、java虚拟机对非堆区内存配置的两个参数：" class="headerlink" title="3.1、java虚拟机对非堆区内存配置的两个参数："></a>3.1、java虚拟机对非堆区内存配置的两个参数：</h5><p>​    1、-XX:PermSize：表示非堆区初始内存分配大小（方法区）<br>​    2、-XX:MaxPermSize：表示对非堆区分配的内存的最大上限（方法区）。</p>
+<p>​    在配置之前一定要慎重的考虑一下自身软件所需要的非堆区内存大小，因为此处内存是不会被java垃圾回收机制进行处理的地方。并且更加要注意的是最大堆内存与最大非堆内存的和绝对不能够超出操作系统的可用内存。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/" itemprop="url">
-              
-                <span itemprop="name">JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T14:22:13+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/scala-集合转换-java集合/" itemprop="url">
-              
-                <span itemprop="name">scala 集合转换 java集合</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T14:15:43+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/sparksql处理小文件/" itemprop="url">
-              
-                <span itemprop="name">sparksql处理小文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T13:51:49+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/自己搭建梯子/" itemprop="url">
-              
-                <span itemprop="name">自己搭建梯子</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T13:34:32+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/28/网络模型和tcp-ip协议/" itemprop="url">
-              
-                <span itemprop="name">网络模型和tcp/ip协议</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T13:23:23+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/27/Linux安装LAMP/" itemprop="url">
-              
-                <span itemprop="name">Linux安装LAMP</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-27T10:35:30+08:00" content="2019-05-27">
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;"><br>-------------   thanks for your readding !   -------------<br><br><br><br></div>
+    
+</div>
+  
+	</div>
+	
+
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支付将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="TianJinLiang 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="TianJinLiang 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i> JAVA</a>
+          
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
+          
+            <a href="/tags/GC/" rel="tag"><i class="fa fa-tag"></i> GC</a>
+          
+            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/scala-集合转换-java集合/" rel="next" title="scala 集合转换 java集合">
+                <i class="fa fa-chevron-left"></i> scala 集合转换 java集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/28/Spark通信架构/" rel="prev" title="Spark通信架构">
+                Spark通信架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -668,6 +634,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -688,8 +661,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -781,6 +763,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、参数设置背景"><span class="nav-number">1.</span> <span class="nav-text">1、参数设置背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分："><span class="nav-number">2.</span> <span class="nav-text">2、JVM按照其存储数据的内容将所需内存分配为堆区与非堆区两个部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、堆区参数配置"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、堆区参数配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2、非堆区参数配置"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、非堆区参数配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、jvm-参数配置"><span class="nav-number">3.</span> <span class="nav-text">3、jvm 参数配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1、java虚拟机对非堆区内存配置的两个参数："><span class="nav-number">3.1.</span> <span class="nav-text">3.1、java虚拟机对非堆区内存配置的两个参数：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -940,6 +938,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
