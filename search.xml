@@ -4,35 +4,6 @@
   
     
     <entry>
-      <title>主流的OLAP引擎</title>
-      <link href="/2019/05/30/%E4%B8%BB%E6%B5%81%E7%9A%84OLAP%E5%BC%95%E6%93%8E/"/>
-      <url>/2019/05/30/%E4%B8%BB%E6%B5%81%E7%9A%84OLAP%E5%BC%95%E6%93%8E/</url>
-      
-        <content type="html"><![CDATA[<h4 id="引用概念"><a href="#引用概念" class="headerlink" title="引用概念"></a>引用概念</h4><ul><li><strong>Serde</strong>：序列化反序列化,serialize/deSerialize</li><li><strong>MPP</strong>：大规模并行处理技术(Massively Parallel Processor)</li><li>按照查询类型划分，OLAP一般分为即席查询和固化查询，<ul><li><strong>即席查询</strong>:通过手写sql完成一些临时的数据分析需求，这类sql形式多变、逻辑复杂，对查询时间没有严格要求</li><li><strong>固化查询</strong>：指的是一些固化下来的取数、看数需求，通过数据产品的形式提供给用户，从而提高数据分析和运营的效率。这类的sql固定模式，对响应时间有较高要求。</li></ul></li></ul><h4 id="按照架构实现划分，主流的OLAP引擎主要有下面三点："><a href="#按照架构实现划分，主流的OLAP引擎主要有下面三点：" class="headerlink" title="按照架构实现划分，主流的OLAP引擎主要有下面三点："></a>按照架构实现划分，主流的OLAP引擎主要有下面三点：</h4><ul><li><p><strong>MPP架构系统</strong>(Presto/Impala/SparkSQL/Drill等)。这种架构主要还是从查询引擎入手，使用分布式查询引擎，而不是使用hive+mapreduce架构，提高查询效率。</p></li><li><p><strong>搜索引擎架构的系统</strong>(es，solr等)，在入库时将数据转换为倒排索引，采用Scatter-Gather计算模型，牺牲了灵活性换取很好的性能，在搜索类查询上能做到亚秒级响应。但是对于扫描聚合为主的查询，随着处理数据量的增加，响应时间也会退化到分钟级。</p></li><li><p><strong>预计算系统</strong>（Druid/Kylin等）则在入库时对数据进行预聚合，进一步牺牲灵活性换取性能，以实现对超大数据集的秒级响应。</p><p>数据轨迹现有的实现方式，从业务诉求看为:每账期按照指定的查询列取数据，进行分析未结算原因，偏向固化查询的方式。但现有的实现方式为先按照查询列值查询出主表数据，再根据主表附属表的关联字段，获取查询附属表的sql，sql为动态拼接出来，这种方式更偏向于即席查询的实现。</p></li></ul><p>需要从以下三个方面考虑框架选型：数据存储和构建、安装搭建、开发成本。</p><h4 id="impala"><a href="#impala" class="headerlink" title="impala"></a>impala</h4><p>​    impala是Cloudera开发开源的，Impala是Cloudera开发并开源的，能查询存储在HDFS和HBase中的数据。同Hive一样，也是一种SQL on Hadoop解决方案。但Impala抛弃了MapReduce,使用更类似于传统的MPP数据库技术来提高查询速度。</p><p>impala可以直接查询hdfs或hbase上的数据，可以与现有的存储无缝对接。<br>impala需要单独安装，公司内paas主推。需要与现场确认。<br>impala提供jdbc接口和sql执行引擎，可以与现有系统集成</p><h4 id="Presto"><a href="#Presto" class="headerlink" title="Presto"></a>Presto</h4><p>​    presto是Facebook开源的大数据查询引擎，为了解决hive查询慢产生。使用java编写，数据全部在内存中处理。</p><p>原生集成了Hive、Hbase和关系型数据库。<br>需要与现场确认是否能提供<br>提供jdbc接口和sql执行引擎，可以与现有系统集成</p><h4 id="druid"><a href="#druid" class="headerlink" title="druid"></a>druid</h4><p>​    druid同kylin一样，是采用预计算的方式。主要解决的是对于大量的基于时序的数据进行聚合查询。数据可以实时摄入，进入到Druid后立即可查，同时数据是几乎是不可变。通常是基于时序的事实事件，事实发生后进入Druid，外部系统就可以对该事实进行查询。</p><p>需要预计算，将数据存储在druid的Segment文件中，占用一部分存储资源<br>需要与现场确认是否能提供<br>对sql支持不友好，需要用他自己的方言书写</p><h4 id="kylin"><a href="#kylin" class="headerlink" title="kylin"></a>kylin</h4><p>​    kylin是一种OLAP数据引擎，支持大数据生态圈的数据分析业务，主要是通过预计算的方式将用户设定的多维度数据立方体(cube)缓存起来，达到快速查询的目的。应用场景应该是针对复杂sql join后的数据缓存。<br>这种OLAP引擎，一般包括以下几部分：</p><p>数据构建存储：cube构建，元数据信息<br>sql解析执行：Query引擎(sql解释器)，routing模块(sql执行)<br>上层接口服务；jdbc/odbc接口，rest服务<br>应用思路：将hive中的数据按照查询列 构建成cube，存储到hbase中，数据轨迹连接kylin的jdbc接口实现快速查询。</p><p>需要预计算，将数据构建成cube存储到hbase<br>需要与现场确认是否能提供<br>提供jdbc接口和rest服务<br>redis<br>将要分析的数据同步到redis，在redis中快速查询数据。可以在分析前将本月数据同步到redis。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 数据仓库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> OLAP </tag>
-            
-            <tag> 数据分析 </tag>
-            
-            <tag> 数据仓库 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>数据仓库架构</title>
       <link href="/2019/05/12/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/"/>
       <url>/2019/05/12/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%9E%B6%E6%9E%84/</url>
@@ -79,6 +50,35 @@
             <tag> java </tag>
             
             <tag> 线程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>主流的OLAP引擎</title>
+      <link href="/2019/01/10/%E4%B8%BB%E6%B5%81%E7%9A%84OLAP%E5%BC%95%E6%93%8E/"/>
+      <url>/2019/01/10/%E4%B8%BB%E6%B5%81%E7%9A%84OLAP%E5%BC%95%E6%93%8E/</url>
+      
+        <content type="html"><![CDATA[<h4 id="引用概念"><a href="#引用概念" class="headerlink" title="引用概念"></a>引用概念</h4><ul><li><strong>Serde</strong>：序列化反序列化,serialize/deSerialize</li><li><strong>MPP</strong>：大规模并行处理技术(Massively Parallel Processor)</li><li>按照查询类型划分，OLAP一般分为即席查询和固化查询，<ul><li><strong>即席查询</strong>:通过手写sql完成一些临时的数据分析需求，这类sql形式多变、逻辑复杂，对查询时间没有严格要求</li><li><strong>固化查询</strong>：指的是一些固化下来的取数、看数需求，通过数据产品的形式提供给用户，从而提高数据分析和运营的效率。这类的sql固定模式，对响应时间有较高要求。</li></ul></li></ul><h4 id="按照架构实现划分，主流的OLAP引擎主要有下面三点："><a href="#按照架构实现划分，主流的OLAP引擎主要有下面三点：" class="headerlink" title="按照架构实现划分，主流的OLAP引擎主要有下面三点："></a>按照架构实现划分，主流的OLAP引擎主要有下面三点：</h4><ul><li><p><strong>MPP架构系统</strong>(Presto/Impala/SparkSQL/Drill等)。这种架构主要还是从查询引擎入手，使用分布式查询引擎，而不是使用hive+mapreduce架构，提高查询效率。</p></li><li><p><strong>搜索引擎架构的系统</strong>(es，solr等)，在入库时将数据转换为倒排索引，采用Scatter-Gather计算模型，牺牲了灵活性换取很好的性能，在搜索类查询上能做到亚秒级响应。但是对于扫描聚合为主的查询，随着处理数据量的增加，响应时间也会退化到分钟级。</p></li><li><p><strong>预计算系统</strong>（Druid/Kylin等）则在入库时对数据进行预聚合，进一步牺牲灵活性换取性能，以实现对超大数据集的秒级响应。</p><p>数据轨迹现有的实现方式，从业务诉求看为:每账期按照指定的查询列取数据，进行分析未结算原因，偏向固化查询的方式。但现有的实现方式为先按照查询列值查询出主表数据，再根据主表附属表的关联字段，获取查询附属表的sql，sql为动态拼接出来，这种方式更偏向于即席查询的实现。</p></li></ul><p>需要从以下三个方面考虑框架选型：数据存储和构建、安装搭建、开发成本。</p><h4 id="impala"><a href="#impala" class="headerlink" title="impala"></a>impala</h4><p>​    impala是Cloudera开发开源的，Impala是Cloudera开发并开源的，能查询存储在HDFS和HBase中的数据。同Hive一样，也是一种SQL on Hadoop解决方案。但Impala抛弃了MapReduce,使用更类似于传统的MPP数据库技术来提高查询速度。</p><p>impala可以直接查询hdfs或hbase上的数据，可以与现有的存储无缝对接。<br>impala需要单独安装，公司内paas主推。需要与现场确认。<br>impala提供jdbc接口和sql执行引擎，可以与现有系统集成</p><h4 id="Presto"><a href="#Presto" class="headerlink" title="Presto"></a>Presto</h4><p>​    presto是Facebook开源的大数据查询引擎，为了解决hive查询慢产生。使用java编写，数据全部在内存中处理。</p><p>原生集成了Hive、Hbase和关系型数据库。<br>需要与现场确认是否能提供<br>提供jdbc接口和sql执行引擎，可以与现有系统集成</p><h4 id="druid"><a href="#druid" class="headerlink" title="druid"></a>druid</h4><p>​    druid同kylin一样，是采用预计算的方式。主要解决的是对于大量的基于时序的数据进行聚合查询。数据可以实时摄入，进入到Druid后立即可查，同时数据是几乎是不可变。通常是基于时序的事实事件，事实发生后进入Druid，外部系统就可以对该事实进行查询。</p><p>需要预计算，将数据存储在druid的Segment文件中，占用一部分存储资源<br>需要与现场确认是否能提供<br>对sql支持不友好，需要用他自己的方言书写</p><h4 id="kylin"><a href="#kylin" class="headerlink" title="kylin"></a>kylin</h4><p>​    kylin是一种OLAP数据引擎，支持大数据生态圈的数据分析业务，主要是通过预计算的方式将用户设定的多维度数据立方体(cube)缓存起来，达到快速查询的目的。应用场景应该是针对复杂sql join后的数据缓存。<br>这种OLAP引擎，一般包括以下几部分：</p><p>数据构建存储：cube构建，元数据信息<br>sql解析执行：Query引擎(sql解释器)，routing模块(sql执行)<br>上层接口服务；jdbc/odbc接口，rest服务<br>应用思路：将hive中的数据按照查询列 构建成cube，存储到hbase中，数据轨迹连接kylin的jdbc接口实现快速查询。</p><p>需要预计算，将数据构建成cube存储到hbase<br>需要与现场确认是否能提供<br>提供jdbc接口和rest服务<br>redis<br>将要分析的数据同步到redis，在redis中快速查询数据。可以在分析前将本月数据同步到redis。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据仓库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OLAP </tag>
+            
+            <tag> 数据分析 </tag>
+            
+            <tag> 数据仓库 </tag>
             
         </tags>
       
