@@ -230,6 +230,35 @@
     
     
     <entry>
+      <title>Springboot整合log4j2并将日志发送到flume</title>
+      <link href="/2018/02/04/Springboot%E6%95%B4%E5%90%88log4j2%E5%B9%B6%E5%B0%86%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81%E5%88%B0flume/"/>
+      <url>/2018/02/04/Springboot%E6%95%B4%E5%90%88log4j2%E5%B9%B6%E5%B0%86%E6%97%A5%E5%BF%97%E5%8F%91%E9%80%81%E5%88%B0flume/</url>
+      
+        <content type="html"><![CDATA[<p>首先pom文件中增加log4j2</p><pre><code>&lt;dependency&gt;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;&lt;/dependency&gt;</code></pre><p>要在springboot启动的时候就强制使用log4j2，需要排除默认的日志：</p><pre><code>&lt;dependency&gt;  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;  &lt;exclusions&gt;    &lt;exclusion&gt;       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;      &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;    &lt;/exclusion&gt;  &lt;/exclusions&gt;&lt;/dependency&gt;</code></pre><p>然后在resource下增加log4j2的配置文件log4j2.xml.</p><p>然后在默认配置文件application.properties中指定一下log4j2的配置文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.config=classpath:log4j2.xml</span><br></pre></td></tr></table></figure><p>这里需要注意一下，按照官方文档的说法，是会自动发现日志的配置文件的，在开发调试过程中也确实是这样。但是如果要打成war包部署到tomcat中，而且是linux下的tomcat。就会有问题，手动指定一下才会生效。如果只是打jar包通过main方法启动是没有问题的。</p><p>至此springboot整合log4j2就基本完成了。</p><p>然后在log4j2中配置flume</p><p>还是从pom文件开始：</p><pre><code>&lt;dependency&gt;    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;  &lt;artifactId&gt;log4j-flume-ng&lt;/artifactId&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;org.apache.flume&lt;/groupId&gt;  &lt;artifactId&gt;flume-ng-embedded-agent&lt;/artifactId&gt;  &lt;version&gt;1.7.0&lt;/version&gt;  &lt;exclusions&gt;      &lt;exclusion&gt;          &lt;groupId&gt;org.slf4j&lt;/groupId&gt;          &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;      &lt;/exclusion&gt;      &lt;exclusion&gt;          &lt;groupId&gt;org.slf4j&lt;/groupId&gt;          &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;      &lt;/exclusion&gt;      &lt;exclusion&gt;          &lt;groupId&gt;log4j&lt;/groupId&gt;          &lt;artifactId&gt;log4j&lt;/artifactId&gt;      &lt;/exclusion&gt;  &lt;/exclusions&gt;&lt;/dependency&gt;</code></pre><p>log4j2支持的flume是embedded模式的，所以加入flume-ng-embedded-agent</p><p>然后log4j2的配置文件中加入flumeAppend</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;Configuration status=&quot;WARN&quot;&gt;  &lt;Appenders&gt;&lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;  &lt;PatternLayout pattern=&quot;%d{yyyy-MM-dd HH:mm:ss SSS} [myapp] %m%n&quot;/&gt;&lt;/Console&gt;&lt;Flume name=&quot;FlumeAppender&quot; compress=&quot;false&quot; type=&quot;Embedded&quot; &gt;  &lt;Property name=&quot;channel.type&quot;&gt;memory&lt;/Property&gt;  &lt;Property name=&quot;channel.capacity&quot;&gt;200&lt;/Property&gt;  &lt;Property name=&quot;sinks&quot;&gt;agent1&lt;/Property&gt;  &lt;Property name=&quot;agent1.type&quot;&gt;avro&lt;/Property&gt;  &lt;Property name=&quot;agent1.hostname&quot;&gt;192.168.0.100&lt;/Property&gt;  &lt;Property name=&quot;agent1.port&quot;&gt;44444&lt;/Property&gt;  &lt;Property name=&quot;agent1.batch-size&quot;&gt;100&lt;/Property&gt;  &lt;Property name=&quot;processor.type&quot;&gt;failover&lt;/Property&gt;  &lt;PatternLayout charset=&quot;UTF-8&quot; pattern=&quot;%d{yyyy-MM-dd HH:mm:ss SSS} [myapp] %m%n&quot; /&gt;&lt;/Flume&gt;  &lt;/Appenders&gt;  &lt;Loggers&gt;&lt;Logger name=&quot;sysLog&quot; level=&quot;trace&quot;&gt;  &lt;AppenderRef ref=&quot;FlumeAppender&quot;/&gt;&lt;/Logger&gt;&lt;Root level=&quot;info&quot;&gt;  &lt;AppenderRef ref=&quot;Console&quot;/&gt;&lt;/Root&gt;  &lt;/Loggers&gt;&lt;/Configuration&gt;</code></pre><p>好了，结束！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> flume </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> springboot </tag>
+            
+            <tag> log4j </tag>
+            
+            <tag> flume </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sparksql处理小文件</title>
       <link href="/2017/09/03/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/"/>
       <url>/2017/09/03/sparksql%E5%A4%84%E7%90%86%E5%B0%8F%E6%96%87%E4%BB%B6/</url>
