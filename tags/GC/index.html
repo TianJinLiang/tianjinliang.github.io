@@ -96,7 +96,7 @@
 <meta name="description" content="好记性不如烂笔头">
 <meta property="og:type" content="website">
 <meta property="og:title" content="良心博客">
-<meta property="og:url" content="http://yoursite.com/tags/GC/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/gc/index.html">
 <meta property="og:site_name" content="良心博客">
 <meta property="og:description" content="好记性不如烂笔头">
 <meta property="og:locale" content="zh-Hans">
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/GC/">
+  <link rel="canonical" href="http://yoursite.com/tags/gc/">
 
 
 
 
 
-  <title>标签: GC | 良心博客</title>
+  <title>标签: gc | 良心博客</title>
   
 
 
@@ -322,7 +322,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>GC<small>标签</small>
+        <h1>gc<small>标签</small>
         </h1>
       </div>
 
@@ -334,43 +334,17 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2016/09/21/GC-日志分析/" itemprop="url">
+            <a class="post-title-link" href="/2019/06/04/spark调优系列之内存和GC调优/" itemprop="url">
               
-                <span itemprop="name">GC 日志分析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-09-21T19:08:38+08:00" content="2016-09-21">
-          09-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/08/06/JAVA-Xms-Xmx-XX-PermSize-XX-MaxPermSize-区别/" itemprop="url">
-              
-                <span itemprop="name">JAVA -Xms -Xmx -XX:PermSize -XX:MaxPermSize 区别</span>
+                <span itemprop="name">spark调优系列之内存和GC调优</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-08-06T19:22:13+08:00" content="2016-08-06">
-          08-06
+        <time class="post-time" itemprop="dateCreated" datetime="2019-06-04T13:17:49+08:00" content="2019-06-04">
+          06-04
         </time>
       </div>
 
@@ -432,7 +406,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +428,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -550,7 +524,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共21.6k字</span>
+  <span class="post-count">博客全站共25.1k字</span>
 </div>
 
         
@@ -1026,6 +1000,49 @@
     }
 
     // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched === false) {
