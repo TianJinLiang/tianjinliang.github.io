@@ -244,9 +244,9 @@
       
         <tags>
             
-            <tag> java </tag>
-            
             <tag> spark </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
@@ -481,6 +481,33 @@
     
     
     <entry>
+      <title>Hadoop的那些事儿</title>
+      <link href="/2017/02/18/Hadoop%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+      <url>/2017/02/18/Hadoop%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/</url>
+      
+        <content type="html"><![CDATA[<h4 id="一、hadoop是什么"><a href="#一、hadoop是什么" class="headerlink" title="一、hadoop是什么"></a>一、hadoop是什么</h4><p>​    Hadoop不是指具体一个框架或者组件，它是Apache软件基金会下用Java语言开发的一个开源分布式计算平台。HDFS有高容错性的特点，并且设计用来部署在低廉的（low-cost）硬件上；而且它提供高吞吐量（high throughput）来访问应用程序的数据，适合那些有着超大数据集（large data set）的应用程序。实现在大量计算机组成的集群中对海量数据进行分布式计算。适合大数据的分布式存储和计算平台。</p><h4 id="二、Hadoop的起源"><a href="#二、Hadoop的起源" class="headerlink" title="二、Hadoop的起源"></a>二、Hadoop的起源</h4><p>​    Hadoop最早起源于Nutch。Nutch的设计目标是构建一个大型的全网搜索引擎，包括网页抓取、索引、查询等功能，但随着抓取网页数量的增加，遇到了严重的可扩展性问题——如何解决数十亿网页的存储和索引问题。<br>​    2003-2004年，Google公布了部分GFS和MapReduce思想的细节，受此启发的Doug Cutting等人用2年的业余时间实现了HDFS和MapReduce机制，使Nutch性能飙升。然后Yahoo招安Doug Gutting及其项目。</p><p>​    2005年，Hadoop作为Lucene的子项目Nutch的一部分正式引入Apache基金会。<br>​    2006年2月被分离出来，成为一套完整独立的软件，起名为Hadoop，Hadoop名字不是一个缩写，而是一个生造出来的词。是Hadoop之父Doug Cutting儿子毛绒玩具象命名的。<br>​    总结起来，Hadoop起源于Google的三大论文：GFS：Google的分布式文件系统Google File System；MapReduce：Google的MapReduce开源分布式并行计算框架；BigTable：一个大型的分布式数据库。演变关系：GFS—-&gt;HDFS；Google MapReduce—-&gt;Hadoop MapReduce；BigTable—-&gt;HBase。</p><h4 id="三、Hadoop大事件"><a href="#三、Hadoop大事件" class="headerlink" title="三、Hadoop大事件"></a>三、Hadoop大事件</h4><p>2004年— 最初的版本(现在称为HDFS和MapReduce)由Doug Cutting和Mike Cafarella开始实施。<br>2005年12月— Nutch移植到新的框架，Hadoop在20个节点上稳定运行。<br>2006年1月— Doug Cutting加入雅虎。<br>2006年2月— Apache Hadoop项目正式启动以支持MapReduce和HDFS的独立发展。<br>2006年2月— 雅虎的网格计算团队采用Hadoop。<br>2006年4月— 标准排序(10 GB每个节点)在188个节点上运行47.9个小时。<br>2006年5月— 雅虎建立了一个300个节点的Hadoop研究集群。<br>2006年5月— 标准排序在500个节点上运行42个小时(硬件配置比4月的更好)。<br>2006年11月— 研究集群增加到600个节点。<br>2006年12月— 标准排序在20个节点上运行1.8个小时，100个节点3.3小时，500个节点5.2小时，900个节点7.8个小时。<br>2007年1月— 研究集群到达900个节点。<br>2007年4月— 研究集群达到两个1000个节点的集群。<br>2008年4月— 赢得世界最快1TB数据排序在900个节点上用时209秒。<br>2008年7月— 雅虎测试节点增加到4000个<br>2008年9月— Hive成为Hadoop的子项目<br>2008年11月— Google宣布其MapReduce用68秒对1TB的程序进行排序<br>2008年10月— 研究集群每天装载10TB的数据。<br>2008年— 淘宝开始投入研究基于Hadoop的系统–云梯。云梯总容量约9.3PB，共有1100台机器，每天处理18000道作业，扫描500TB数据。<br>2009年3月— 17个集群总共24 000台机器。<br>2009年3月— Cloudera推出CDH（Cloudera’s Dsitribution Including Apache Hadoop）<br>2009年4月— 赢得每分钟排序，雅虎59秒内排序500 GB(在1400个节点上)和173分钟内排序100 TB数据(在3400个节点上)。<br>2009年5月— Yahoo的团队使用Hadoop对1 TB的数据进行排序只花了62秒时间。<br>2009年7月— Hadoop Core项目更名为Hadoop Common;<br>2009年7月— MapReduce 和 Hadoop Distributed File System (HDFS) 成为Hadoop项目的独立子项目。<br>2009年7月— Avro 和 Chukwa 成为Hadoop新的子项目。<br>2009年9月— 亚联BI团队开始跟踪研究Hadoop<br>2009年12月—亚联提出橘云战略，开始研究Hadoop<br>2010年5月— Avro脱离Hadoop项目，成为Apache顶级项目。<br>2010年5月— HBase脱离Hadoop项目，成为Apache顶级项目。<br>2010年5月— IBM提供了基于Hadoop 的大数据分析软件——InfoSphere BigInsights，包括基础版和企业版。<br>2010年9月— Hive( Facebook) 脱离Hadoop，成为Apache顶级项目。<br>2010年9月— Pig脱离Hadoop，成为Apache顶级项目。<br>2011年1月— ZooKeeper 脱离Hadoop，成为Apache顶级项目。<br>2011年3月— Apache Hadoop获得Media Guardian Innovation Awards 。<br>2011年3月— Platform Computing 宣布在它的Symphony软件中支持Hadoop MapReduce API。<br>2011年5月— Mapr Technologies公司推出分布式文件系统和MapReduce引擎——MapR Distribution for Apache Hadoop。<br>2011年5月— HCatalog 1.0发布。该项目由Hortonworks 在2010年3月份提出，HCatalog主要用于解决数据存储、元数据的问题，主要解决HDFS的瓶颈，它提供了一个地方来存储数据的状态信息，这使得 数据清理和归档工具可以很容易的进行处理。<br>2011年4月— SGI( Silicon Graphics International )基于SGI Rackable和CloudRack服务器产品线提供Hadoop优化的解决方案。<br>2011年5月— EMC为客户推出一种新的基于开源Hadoop解决方案的数据中心设备——GreenPlum HD，以助其满足客户日益增长的数据分析需求并加快利用开源数据分析软件。Greenplum是EMC在2010年7月收购的一家开源数据仓库公司。<br>2011年5月— 在收购了Engenio之后， NetApp推出与Hadoop应用结合的产品E5400存储系统。<br>2011年6月— Calxeda公司(之前公司的名字是Smooth-Stone)发起了“开拓者行动”，一个由10家软件公司组成的团队将为基于Calxeda即将推出的ARM系统上芯片设计的服务器提供支持。并为Hadoop提供低功耗服务器技术。<br>2011年6月— 数据集成供应商Informatica发布了其旗舰产品，产品设计初衷是处理当今事务和社会媒体所产生的海量数据，同时支持Hadoop。<br>2011年7月— Yahoo!和硅谷风险投资公司 Benchmark Capital创建了Hortonworks 公司，旨在让Hadoop更加鲁棒(可靠)，并让企业用户更容易安装、管理和使用Hadoop。<br>2011年8月— Cloudera公布了一项有益于合作伙伴生态系统的计划——创建一个生态系统，以便硬件供应商、软件供应商以及系统集成商可以一起探索如何使用Hadoop更好的洞察数据。<br>2011年8月— Dell与Cloudera联合推出Hadoop解决方案——Cloudera Enterprise。Cloudera Enterprise基于Dell PowerEdge C2100机架服务器以及Dell PowerConnect 6248以太网交换机</p><h4 id="四、hadoop三大公司发型版本"><a href="#四、hadoop三大公司发型版本" class="headerlink" title="四、hadoop三大公司发型版本"></a>四、hadoop三大公司发型版本</h4><p>1.免费开源版本apache <a href="http://hadoop.apache.org/" target="_blank" rel="noopener">http://hadoop.apache.org/</a><br>优点：拥有全世界的开源贡献者，代码更新迭代版本比较快，<br>缺点：版本的升级，版本的维护，版本的兼容性，版本的补丁都可能考虑不太周到，学习可以用，实际生产工作环境尽量不要使用。apache所有软件的下载地址（包括各种历史版本）：<a href="http://archive.apache.org/dist/" target="_blank" rel="noopener">http://archive.apache.org/dist/</a></p><p>2.免费开源版本hortonWorks <a href="https://hortonworks.com/" target="_blank" rel="noopener">https://hortonworks.com/</a><br>​    hortonworks主要是雅虎主导Hadoop开发的副总裁，带领二十几个核心成员成立Hortonworks，核心产品软件HDP（ambari），HDF免费开源，并且提供一整套的web管理界面，供我们可以通过web界面管理我们的集群状态，web管理界面软件HDF网址（<a href="http://ambari.apache.org/）" target="_blank" rel="noopener">http://ambari.apache.org/）</a></p><p>3.软件收费版本ClouderaManager <a href="https://www.cloudera.com/" target="_blank" rel="noopener">https://www.cloudera.com/</a><br>​    cloudera主要是美国一家大数据公司在apache开源hadoop的版本上，通过自己公司内部的各种补丁，实现版本之间的稳定运行，大数据生态圈的各个版本的软件都提供了对应的版本，解决了版本的升级困难，版本兼容性等各种问题，生产环境强烈推荐使用</p><p>注：2018年10月Cloudera和Hortonworks宣布合并</p><h4 id="五、hadoop的架构模型"><a href="#五、hadoop的架构模型" class="headerlink" title="五、hadoop的架构模型"></a>五、hadoop的架构模型</h4><h5 id="1-x的版本架构模型"><a href="#1-x的版本架构模型" class="headerlink" title="1.x的版本架构模型"></a>1.x的版本架构模型</h5><p><strong>NameNode</strong>：集群当中的主节点，主要用于管理集群当中的各种数据<br><strong>secondaryNameNode</strong>：主要能用于hadoop当中元数据信息的辅助管理<br><strong>DataNode</strong>：集群当中的从节点，主要用于存储集群当中的各种数据数据计算核心模块(MapReduce)：<br><strong>JobTracker</strong>：接收用户的计算请求任务，并分配任务给从节点<br><strong>TaskTracker</strong>：负责执行主节点JobTracker分配的任务</p><h5 id="2-x的版本架构模型"><a href="#2-x的版本架构模型" class="headerlink" title="2.x的版本架构模型"></a>2.x的版本架构模型</h5><p><strong>NameNode</strong>：集群当中的主节点，主要用于管理集群当中的各种数据<br><strong>secondaryNameNode</strong>：主要能用于hadoop当中元数据信息的辅助管理<br><strong>DataNode</strong>：集群当中的从节点，主要用于存储集群当中的各种数据数据计算核心模块(MapReduce)<br><strong>ResourceManager</strong>：接收用户的计算请求任务，并负责集群的资源分配，以及计算任务的划分<br><strong>NodeManager</strong>：负责执行主节点ResourceManager分配的任务</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hadoop </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>scala 集合转换 java集合</title>
       <link href="/2017/02/14/scala-%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2-java%E9%9B%86%E5%90%88/"/>
       <url>/2017/02/14/scala-%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2-java%E9%9B%86%E5%90%88/</url>
@@ -502,6 +529,27 @@
             <tag> scala </tag>
             
             <tag> 集合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yarn的cpu配置</title>
+      <link href="/2017/02/11/yarn%E7%9A%84cpu%E9%85%8D%E7%BD%AE/"/>
+      <url>/2017/02/11/yarn%E7%9A%84cpu%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="CPU配置"><a href="#CPU配置" class="headerlink" title="CPU配置"></a>CPU配置</h2><p>​    YARN中目前的CPU被划分成虚拟CPU（CPU virtual Core），这里的虚拟CPU是YARN自己引入的概念，初衷    是，考虑到不同节点的CPU性能可能不同，每个CPU具有的计算能力也是不一样的，比如某个物理CPU的计算能力可能是另外一个物理CPU的2倍，这时候，你可以通过为第一个物理CPU多配置几个虚拟CPU弥补这种差异。用户提交作业时，可以指定每个任务需要的虚拟CPU个数。</p><p>在YARN中，CPU相关配置参数如下：</p><ul><li><p><code>yarn.nodemanager.resource.cpu-vcores</code> ：表示该节点上YARN可使用的虚拟CPU个数，默认是8，注意，目前推荐将该值设值为与物理CPU核数数目相同。如果你的节点CPU核数不够8个，则需要调减小这个值，而YARN不会智能的探测节点的物理CPU总数。</p></li><li><p><code>yarn.scheduler.minimum-allocation-vcores</code> ：单个任务可申请的最小虚拟CPU个数，默认是1，如果一个任务申请的CPU个数少于该数，则该对应的值改为这个数。</p></li><li><p><code>yarn.scheduler.maximum-allocation-vcores</code> ：单个任务可申请的最多虚拟CPU个数，默认是32。</p><p>对于一个CPU核数较多的集群来说，上面的默认配置显然是不合适的，在我的测试集群中，4个节点每个机器CPU核数为32，可以配置为：</p></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;yarn.nodemanager.resource.cpu-vcores&lt;/name&gt;</span><br><span class="line">&lt;value&gt;32&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;yarn.scheduler.maximum-allocation-vcores&lt;/name&gt;</span><br><span class="line">&lt;value&gt;128&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>根据上面的说明，我的测试集群中集群节点指标如下：<img src="/2017/02/11/yarn的cpu配置/ZZbaUjI.jpg" alt="ZZbaUjI"></p><p>​    </p><p>​    实际生产环境中，可能不会像上面那样设置，比如不会把所有节点的CPU核数都分配给Spark，需要保留一个核留给系统使用；另外，内存上限也会做些设置。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+            <tag> yarn </tag>
             
         </tags>
       
@@ -690,11 +738,11 @@
             
             <tag> GC </tag>
             
+            <tag> spark </tag>
+            
             <tag> JAVA </tag>
             
             <tag> JVM </tag>
-            
-            <tag> spark </tag>
             
         </tags>
       
