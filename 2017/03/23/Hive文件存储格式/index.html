@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格式，直接load就OK，不需要走">
+<meta name="description" content="hive主流的文件格式性能对比 综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格">
 <meta name="keywords" content="hive,格式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive文件存储格式">
 <meta property="og:url" content="http://yoursite.com/2017/03/23/Hive文件存储格式/index.html">
 <meta property="og:site_name" content="良心博客">
-<meta property="og:description" content="综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格式，直接load就OK，不需要走">
+<meta property="og:description" content="hive主流的文件格式性能对比 综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-06T09:34:16.583Z">
+<meta property="og:updated_time" content="2019-07-29T14:51:27.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive文件存储格式">
-<meta name="twitter:description" content="综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格式，直接load就OK，不需要走">
+<meta name="twitter:description" content="hive主流的文件格式性能对比 综述​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。 ​    如果为textfile的文件格">
 
 
 
@@ -461,7 +461,8 @@
       
 
       
-        <h4 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h4><p>​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。</p>
+        <p>hive主流的文件格式性能对比</p>
+<h4 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h4><p>​    HIve的文件存储格式有四种：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET，前面两种是行式存储，后面两种是列式存储；所谓的存储格式就是在Hive建表的时候指定的将表中的数据按照什么样子的存储方式，如果指定了A方式，那么在向表中插入数据的时候，将会使用该方式向HDFS中添加相应的数据类型。</p>
 <p>​    如果为textfile的文件格式，直接load就OK，不需要走MapReduce；如果是其他的类型就需要走MapReduce了，因为其他的类型都涉及到了文件的压缩，这需要借助MapReduce的压缩方式来实现。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p> 比对三种主流的文件存储格式TEXTFILE 、ORC、PARQUET</p>
 <p>压缩比：ORC &gt;  Parquet &gt;  textFile（textfile没有进行压缩）</p>
@@ -662,7 +663,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -768,7 +769,7 @@ var jiathis_config={
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2019</span>
+<div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -796,7 +797,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共35.4k字</span>
+  <span class="post-count">博客全站共35.5k字</span>
 </div>
 
         
